@@ -3,4 +3,6 @@
 		DO NOT EDIT 
 -->
 # html-to-canvas
-undefined
+
+
+***See <http://solsort.github.io/html-to-canvas> for details.***
