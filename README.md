@@ -5,4 +5,4 @@
 # html-to-canvas
 
 
-***See <http://solsort.github.io/html-to-canvas> for details.***
+***See <http://html-to-canvas.solsort.com> for details.***
