@@ -11,44 +11,27 @@ module.exports = { drawHtml, html2canvas, html2png, main }
 //
 async function main() {
   let imgSrc = await 
-    html2png('<h1>Image generated from html</h1>', {height: 100});
+    html2png('<h3>Demo: Image generated from html</h3>', 
+      {height: 100, width: 200});
   let canvasElem = await 
-    html2canvas('<h1>Canvas from html</h1>', {height:100});
+    html2canvas('<em>Demo: Canvas from html</em>', 
+      {height:100, width: 100});
 
   window.app.innerHTML = `<img src="${imgSrc}">`;
   window.app.appendChild(canvasElem);
 }
 
-// ## Utility for loading an image
-
-let loadImage = (src) => new Promise(function(resolve, reject) {
-  var img = new Image();
-  img.src = src;
-  img.onload = function() { resolve(img); };
-  img.onerror = reject;
-});
-
-// ## Code for drawing the html to a canvas
-
-async function drawHtml(canvas, html, opt) {
-  opt = opt || {};
-  let w = opt.width || 320;
-  let h = opt.height || 480;
-  let dw = opt.deviceWidth || w;
-
-  let svgImg = await loadImage(`data:image/svg+xml;utf8,` +
-    `<svg xmlns="http://www.w3.org/2000/svg"
-            width="${w}"
-            height="${h}" transform="scale(${w/320})">
-         <foreignObject width="${dw}" height="${h*dw/w}">
-            <div id="thumbnail-html" xmlns="http://www.w3.org/1999/xhtml">
-            ${html}
-            </div>
-         </foreignObject>
-       </svg>`);
-  canvas.getContext('2d').drawImage(svgImg, 0, 0);
+// ## Create a new dataurl
+//
+// options: 
+//
+// - `width`, `height` - size of image/canvas
+// - `deviceWidth` - virtual width of rendered html document
+//
+async function html2png(html, opt) {
+  let canvas = await html2canvas(html, opt);
+  return canvas.toDataURL("image/png");
 }
-
 // ## Create a new canvas
 
 async function html2canvas(html, opt) {
@@ -61,8 +44,33 @@ async function html2canvas(html, opt) {
   return canvas;
 }
 
-// ## Create a new dataurl
-async function html2png(html, opt) {
-  let canvas = await html2canvas(html, opt);
-  return canvas.toDataURL("image/png");
+// ## Code for drawing the html to a canvas
+
+async function drawHtml(canvas, html, opt) {
+  opt = opt || {};
+  let w = opt.width || 320;
+  let h = opt.height || 480;
+  let dw = opt.deviceWidth || w;
+
+  let svgImg = await loadImage(`data:image/svg+xml;utf8,` +
+    `<svg xmlns="http://www.w3.org/2000/svg"
+            width="${w}"
+            height="${h}" transform="scale(${w/dw})">
+         <foreignObject width="${dw}" height="${h*dw/w}">
+            <div id="thumbnail-html" xmlns="http://www.w3.org/1999/xhtml">
+            ${html}
+            </div>
+         </foreignObject>
+       </svg>`);
+  canvas.getContext('2d').drawImage(svgImg, 0, 0);
 }
+
+// ## Utility for loading an image
+
+let loadImage = (src) => new Promise(function(resolve, reject) {
+  var img = new Image();
+  img.src = src;
+  img.onload = function() { resolve(img); };
+  img.onerror = reject;
+});
+

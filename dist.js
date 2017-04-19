@@ -86,8 +86,8 @@ return /******/ (function(modules) { // webpackBootstrap
 //
 let main = (() => {
   var _ref = _asyncToGenerator(function* () {
-    let imgSrc = yield html2png('<h1>Image generated from html</h1>', { height: 100 });
-    let canvasElem = yield html2canvas('<h1>Canvas from html</h1>', { height: 100 });
+    let imgSrc = yield html2png('<h3>Demo: Image generated from html</h3>', { height: 100, width: 200 });
+    let canvasElem = yield html2canvas('<em>Demo: Canvas from html</em>', { height: 100, width: 100 });
 
     window.app.innerHTML = `<img src="${imgSrc}">`;
     window.app.appendChild(canvasElem);
@@ -98,34 +98,25 @@ let main = (() => {
   };
 })();
 
-// ## Utility for loading an image
+// ## Create a new dataurl
+//
+// options: 
+//
+// - `width`, `height` - size of image/canvas
+// - `deviceWidth` - virtual width of rendered html document
+//
 
-// ## Code for drawing the html to a canvas
 
-let drawHtml = (() => {
-  var _ref2 = _asyncToGenerator(function* (canvas, html, opt) {
-    opt = opt || {};
-    let w = opt.width || 320;
-    let h = opt.height || 480;
-    let dw = opt.deviceWidth || w;
-
-    let svgImg = yield loadImage(`data:image/svg+xml;utf8,` + `<svg xmlns="http://www.w3.org/2000/svg"
-            width="${w}"
-            height="${h}" transform="scale(${w / 320})">
-         <foreignObject width="${dw}" height="${h * dw / w}">
-            <div id="thumbnail-html" xmlns="http://www.w3.org/1999/xhtml">
-            ${html}
-            </div>
-         </foreignObject>
-       </svg>`);
-    canvas.getContext('2d').drawImage(svgImg, 0, 0);
+let html2png = (() => {
+  var _ref2 = _asyncToGenerator(function* (html, opt) {
+    let canvas = yield html2canvas(html, opt);
+    return canvas.toDataURL("image/png");
   });
 
-  return function drawHtml(_x, _x2, _x3) {
+  return function html2png(_x, _x2) {
     return _ref2.apply(this, arguments);
   };
 })();
-
 // ## Create a new canvas
 
 let html2canvas = (() => {
@@ -139,24 +130,38 @@ let html2canvas = (() => {
     return canvas;
   });
 
-  return function html2canvas(_x4, _x5) {
+  return function html2canvas(_x3, _x4) {
     return _ref3.apply(this, arguments);
   };
 })();
 
-// ## Create a new dataurl
+// ## Code for drawing the html to a canvas
 
+let drawHtml = (() => {
+  var _ref4 = _asyncToGenerator(function* (canvas, html, opt) {
+    opt = opt || {};
+    let w = opt.width || 320;
+    let h = opt.height || 480;
+    let dw = opt.deviceWidth || w;
 
-let html2png = (() => {
-  var _ref4 = _asyncToGenerator(function* (html, opt) {
-    let canvas = yield html2canvas(html, opt);
-    return canvas.toDataURL("image/png");
+    let svgImg = yield loadImage(`data:image/svg+xml;utf8,` + `<svg xmlns="http://www.w3.org/2000/svg"
+            width="${w}"
+            height="${h}" transform="scale(${w / dw})">
+         <foreignObject width="${dw}" height="${h * dw / w}">
+            <div id="thumbnail-html" xmlns="http://www.w3.org/1999/xhtml">
+            ${html}
+            </div>
+         </foreignObject>
+       </svg>`);
+    canvas.getContext('2d').drawImage(svgImg, 0, 0);
   });
 
-  return function html2png(_x6, _x7) {
+  return function drawHtml(_x5, _x6, _x7) {
     return _ref4.apply(this, arguments);
   };
 })();
+
+// ## Utility for loading an image
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
