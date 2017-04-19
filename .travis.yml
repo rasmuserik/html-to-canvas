@@ -1,3 +1,10 @@
 language: node_js
 node_js:
 - node
+deploy:
+  provider: npm
+  email: npmjs@solsort.com
+  api_key:
+    secure: MXpGgbj4cf/xQrMtJsQyIdqDXTKqEdYp7GDYVFHC/mEonT936fYoo/3oJxZoufXmzRpLwwwNsc0qKf8PbpCFFLvZcQdsFHHF6WUrvlVzmRiG85Hk00wp/xaqmk9XxcqXH16N4pg4RyaVnt+GOueOVjmYP9VxDREz6Yf+aPXCSWMeJei/+Wd5ZutNcqzQHq52+JPlEcljxa+n0Vr+dyRHVEfw1mi5I0WS0FJWSfN3heocbDXr1R3ArUtDB/kOEvoky/OR/PJJz1CnDsgMM0qML2d8QJM9rxFHmb3UyNRbexkubqhCGhdFouLTALd3e55elyQzzda44rd+KCymwvsT8oDKyFdowkowKg+FLoWyOYY6e4Q3InnmmAZrDiN/TAAbHq7AWyuqcbSSW481prHoRca4wg/NI6rxAVNTNy2fQ5YpDg7oOWCp0XypYJFsHmmWSCyJKHdPMF3WV9yLDoMI4TvtTQF67mD1MQ0iDZ2yI4XMM4XbkgtdumRa2ZsEPaTHsCdYjX6ZxQKjGsh7xP3wNhQaW9F/8Ylqy88DLfeQhLfzbG5CFXEPVNr5ypzZvJtK9hJHXqPxuTd8QagkVfR66ycQpDuYEelSRy2bE4shri/Fvn8WURXY9120TpIE0cmcbEnUzjhhdbJn/A15U29+s0S7nE4PNSm1B5Zalwd6RR8=
+  on:
+    repo: solsort/html-to-canvas
