@@ -1,0 +1,18 @@
+{
+  "name": "html-to-canvas",
+  "scripts": {
+    "release": "simple-javascript release",
+    "dev": "simple-javascript dev",
+    "test": "simple-javascript test"
+  },
+  "devDependencies": {
+    "simple-javascript": "*"
+  },
+  "license": "MIT",
+  "main": "lib.js",
+  "unpkg": "dist.js",
+  "repository": "github:solsort/html-to-canvas",
+  "version": "0.0.1",
+  "homepage": "http://solsort.github.io/html-to-canvas",
+  "description": ""
+}
