@@ -3,6 +3,6 @@
 		DO NOT EDIT 
 -->
 # html-to-canvas
-
+Render html to canvas or create an image from html.
 
 ***See <http://html-to-canvas.solsort.com> for details.***
