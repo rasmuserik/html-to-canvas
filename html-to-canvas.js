@@ -28,10 +28,13 @@ async function main() {
 // - `width`, `height` - size of image/canvas
 // - `deviceWidth` - virtual width of rendered html document
 //
+// implementation:
+
 async function html2png(html, opt) {
   let canvas = await html2canvas(html, opt);
   return canvas.toDataURL("image/png");
 }
+
 // ## Create a new canvas
 
 async function html2canvas(html, opt) {
