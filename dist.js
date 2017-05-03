@@ -130,7 +130,7 @@ let html2png = (() => {
 let html2jpg = (() => {
   var _ref3 = _asyncToGenerator(function* (html, opt) {
     let canvas = yield html2canvas(html, opt);
-    return canvas.toDataURL("image/jpeg", 0.95);
+    return canvas.toDataURL("image/jpeg", opt.quality || 0.95);
   });
 
   return function html2jpg(_x3, _x4) {

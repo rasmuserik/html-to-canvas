@@ -13,6 +13,6 @@
   "main": "lib.js",
   "unpkg": "dist.js",
   "repository": "github:solsort/html-to-canvas",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "homepage": "http://html-to-canvas.solsort.com"
 }

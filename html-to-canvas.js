@@ -46,7 +46,7 @@ async function html2png(html, opt) {
 
 async function html2jpg(html, opt) {
   let canvas = await html2canvas(html, opt);
-  return canvas.toDataURL("image/jpeg", 0.95);
+  return canvas.toDataURL("image/jpeg", opt.quality || 0.95);
 }
 
 // ## Create a new canvas
