@@ -12,7 +12,7 @@ module.exports = {
     loader: 'babel-loader'
   }]},
   plugins: [
-    new webpack.IgnorePlugin(/^(fs|child_process)$/)
+    new webpack.IgnorePlugin(/^(fs|child_process|ws|express|electron|node-fetch|http|crypto)$/)
   ],
   output: {
     libraryTarget: 'umd',

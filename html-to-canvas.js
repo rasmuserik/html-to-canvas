@@ -5,7 +5,7 @@
 // Notice: it works by rendering the html as a svg foreignObject, so the html has to be valid xhtml, and all resources have to be inlined. 
 //
 
-module.exports = { drawHtml, html2canvas, html2png, main }
+module.exports = { drawHtml, html2canvas, html2png, html2jpg, main }
 
 // ## Main function with example.
 //
@@ -21,7 +21,7 @@ async function main() {
   window.app.appendChild(canvasElem);
 }
 
-// ## Create a new dataurl
+// ## Create a new png dataurl
 //
 // options: 
 //
@@ -33,6 +33,20 @@ async function main() {
 async function html2png(html, opt) {
   let canvas = await html2canvas(html, opt);
   return canvas.toDataURL("image/png");
+}
+
+// ## Create a new jpg dataurl
+//
+// options: 
+//
+// - `width`, `height` - size of image/canvas
+// - `deviceWidth` - virtual width of rendered html document
+//
+// implementation:
+
+async function html2jpg(html, opt) {
+  let canvas = await html2canvas(html, opt);
+  return canvas.toDataURL("image/jpeg", 0.95);
 }
 
 // ## Create a new canvas

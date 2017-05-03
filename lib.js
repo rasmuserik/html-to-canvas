@@ -16,14 +16,14 @@ let main = (() => {
   };
 })();
 
-// ## Create a new dataurl
+// ## Create a new png dataurl
 //
 // options: 
 //
 // - `width`, `height` - size of image/canvas
 // - `deviceWidth` - virtual width of rendered html document
 //
-
+// implementation:
 
 let html2png = (() => {
   var _ref2 = _asyncToGenerator(function* (html, opt) {
@@ -35,10 +35,31 @@ let html2png = (() => {
     return _ref2.apply(this, arguments);
   };
 })();
+
+// ## Create a new jpg dataurl
+//
+// options: 
+//
+// - `width`, `height` - size of image/canvas
+// - `deviceWidth` - virtual width of rendered html document
+//
+// implementation:
+
+let html2jpg = (() => {
+  var _ref3 = _asyncToGenerator(function* (html, opt) {
+    let canvas = yield html2canvas(html, opt);
+    return canvas.toDataURL("image/jpeg", 0.95);
+  });
+
+  return function html2jpg(_x3, _x4) {
+    return _ref3.apply(this, arguments);
+  };
+})();
+
 // ## Create a new canvas
 
 let html2canvas = (() => {
-  var _ref3 = _asyncToGenerator(function* (html, opt) {
+  var _ref4 = _asyncToGenerator(function* (html, opt) {
     opt = opt || {};
 
     let canvas = document.createElement('canvas');
@@ -48,15 +69,15 @@ let html2canvas = (() => {
     return canvas;
   });
 
-  return function html2canvas(_x3, _x4) {
-    return _ref3.apply(this, arguments);
+  return function html2canvas(_x5, _x6) {
+    return _ref4.apply(this, arguments);
   };
 })();
 
 // ## Code for drawing the html to a canvas
 
 let drawHtml = (() => {
-  var _ref4 = _asyncToGenerator(function* (canvas, html, opt) {
+  var _ref5 = _asyncToGenerator(function* (canvas, html, opt) {
     opt = opt || {};
     let w = opt.width || 320;
     let h = opt.height || 480;
@@ -74,8 +95,8 @@ let drawHtml = (() => {
     canvas.getContext('2d').drawImage(svgImg, 0, 0);
   });
 
-  return function drawHtml(_x5, _x6, _x7) {
-    return _ref4.apply(this, arguments);
+  return function drawHtml(_x7, _x8, _x9) {
+    return _ref5.apply(this, arguments);
   };
 })();
 
@@ -90,7 +111,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 // Notice: it works by rendering the html as a svg foreignObject, so the html has to be valid xhtml, and all resources have to be inlined. 
 //
 
-module.exports = { drawHtml, html2canvas, html2png, main };let loadImage = src => new Promise(function (resolve, reject) {
+module.exports = { drawHtml, html2canvas, html2png, html2jpg, main };let loadImage = src => new Promise(function (resolve, reject) {
   var img = new Image();
   img.src = src;
   img.onload = function () {
